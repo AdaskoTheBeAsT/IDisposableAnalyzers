@@ -48,7 +48,7 @@ namespace N
             var value = syntaxTree.FindEqualsValueClause(statement).Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = this.value;", "")]
@@ -89,7 +89,7 @@ namespace N
             var value = syntaxTree.FindEqualsValueClause(statement).Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = this.text;", "")]
@@ -130,7 +130,7 @@ namespace N
             var value = syntaxTree.FindEqualsValueClause(statement).Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

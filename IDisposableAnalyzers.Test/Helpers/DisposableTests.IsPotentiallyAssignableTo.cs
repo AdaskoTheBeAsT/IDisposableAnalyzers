@@ -27,7 +27,7 @@ namespace N
 }".AssertReplace("PLACEHOLDER", expression);
             var syntaxTree = CSharpSyntaxTree.ParseText(code);
             var value = syntaxTree.FindEqualsValueClause(expression).Value;
-            Assert.AreEqual(expected, Disposable.IsPotentiallyAssignableFrom(value, null, CancellationToken.None));
+            Assert.That(Disposable.IsPotentiallyAssignableFrom(value, null, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("new string(' ', 1)", false)]
@@ -50,7 +50,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(expression).Value;
-            Assert.AreEqual(expected, Disposable.IsPotentiallyAssignableFrom(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsPotentiallyAssignableFrom(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
     }
 }

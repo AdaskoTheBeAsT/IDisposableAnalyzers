@@ -33,8 +33,8 @@ namespace N
         var type = syntaxTree.FindTypeDeclaration("C");
         using var walker = ConstructorsWalker.Borrow(type, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.NonPrivateCtors.Select(c => c.ToString().Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)[0]));
-        Assert.AreEqual("internal C(), internal C(string text)", actual);
-        Assert.AreEqual(0, walker.ObjectCreations.Count);
+        Assert.That(actual, Is.EqualTo("internal C(), internal C(string text)"));
+        Assert.That(walker.ObjectCreations.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -60,8 +60,8 @@ namespace N
         var type = syntaxTree.FindTypeDeclaration("C");
         using var pooled = ConstructorsWalker.Borrow(type, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", pooled.NonPrivateCtors.Select(c => c.ToString().Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)[0]));
-        Assert.AreEqual("internal C(string text)", actual);
-        Assert.AreEqual(0, pooled.ObjectCreations.Count);
+        Assert.That(actual, Is.EqualTo("internal C(string text)"));
+        Assert.That(pooled.ObjectCreations.Count, Is.EqualTo(0));
     }
 
     [Test]
@@ -87,7 +87,7 @@ namespace N
         var type = syntaxTree.FindTypeDeclaration("C");
         using var walker = ConstructorsWalker.Borrow(type, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.NonPrivateCtors.Select(c => c.ToString().Split('\r')[0]));
-        Assert.AreEqual(string.Empty, actual);
-        Assert.AreEqual("new C()", string.Join(", ", walker.ObjectCreations));
+        Assert.That(actual, Is.EqualTo(string.Empty));
+        Assert.That(string.Join(", ", walker.ObjectCreations), Is.EqualTo("new C()"));
     }
 }

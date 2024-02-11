@@ -32,8 +32,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("disposable = File.OpenRead(fileName)");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(false, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.False);
         }
 
         [TestCase("disposable.Dispose()")]
@@ -61,8 +61,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("disposable = File.OpenRead(fileName)");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Test]
@@ -113,8 +113,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Test]
@@ -141,8 +141,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("disposable = File.OpenRead(fileName)");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Test]
@@ -167,8 +167,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("stream = File.OpenRead(string.Empty)");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Test]
@@ -191,8 +191,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindVariableDeclaration("var form = new Winform()");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol));
-            Assert.AreEqual(true, Disposable.Disposes(symbol, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out ILocalSymbol symbol), Is.True);
+            Assert.That(Disposable.Disposes(symbol, semanticModel, CancellationToken.None),                 Is.True);
         }
     }
 }

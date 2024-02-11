@@ -29,7 +29,7 @@ internal class C
             var value = syntaxTree.FindEqualsValueClause(code).Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -53,7 +53,7 @@ internal class C
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -82,7 +82,7 @@ namespace N
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -111,7 +111,7 @@ namespace N
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -144,7 +144,7 @@ namespace N
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -177,7 +177,7 @@ namespace N
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("var temp1 = ints[0];", "1, 2")]
@@ -210,7 +210,7 @@ namespace N
                                   .Value;
             using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
             var actual = string.Join(", ", walker.Values);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

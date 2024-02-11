@@ -30,7 +30,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(code).Value;
-            Assert.AreEqual(expected, Disposable.IsPotentiallyAssignableFrom(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsPotentiallyAssignableFrom(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
     }
 }

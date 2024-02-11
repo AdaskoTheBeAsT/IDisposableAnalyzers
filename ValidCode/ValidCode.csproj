@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <Description>A project only used by the HappyPathTests. It contains all kinds of weird variations that is still valid code. We use it to test all analyzers. If a bug is found we extract it to a minimal repro and use it in a test for the analyzer but we leave this project as is.</Description>
@@ -23,10 +23,10 @@
     <PackageReference Include="Gu.Inject.Rebind" Version="0.3.9" />
     <PackageReference Include="Gu.Wpf.Reactive" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="Ninject" Version="3.3.6" />
-    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit" Version="4.0.1" />
     <PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
-    <PackageReference Include="reactiveui" Version="19.5.1" />
+    <PackageReference Include="reactiveui" Version="19.5.41" />
   </ItemGroup>
 </Project>

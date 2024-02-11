@@ -38,7 +38,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.P;", "1")]
@@ -71,7 +71,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.p;", "1")]
@@ -116,7 +116,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code1).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.p;", "1")]
@@ -161,7 +161,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -191,7 +191,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause("var temp = this.p").Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual("value", actual);
+        Assert.That(actual, Is.EqualTo("value"));
     }
 
     [Test]
@@ -221,7 +221,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause("var temp = this.p").Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(string.Empty, actual);
+        Assert.That(actual, Is.EqualTo(string.Empty));
     }
 
     [TestCase("var temp1 = this.p;", "1")]
@@ -263,7 +263,7 @@ public sealed class C
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.p;", "1")]
@@ -305,7 +305,7 @@ public sealed class C
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.p;", "1")]
@@ -363,7 +363,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCase("var temp1 = this.P;", "")]
@@ -400,7 +400,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -490,6 +490,6 @@ namespace N
         var field = semanticModel.GetDeclaredSymbolSafe(fieldDeclaration, CancellationToken.None);
         using var walker = AssignedValueWalker.Borrow(field!, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual("null, value", actual);
+        Assert.That(actual, Is.EqualTo("null, value"));
     }
 }

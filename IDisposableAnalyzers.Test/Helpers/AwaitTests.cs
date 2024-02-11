@@ -35,7 +35,7 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var value = syntaxTree.FindEqualsValueClause(expression).Value as InvocationExpressionSyntax;
-        Assert.AreEqual(expectedCode, Await.TaskFromResult(value, semanticModel, CancellationToken.None)?.ToFullString());
+        Assert.That(Await.TaskFromResult(value, semanticModel, CancellationToken.None)?.ToFullString(), Is.EqualTo(expectedCode));
     }
 
     [TestCase("Task.Run(() => 1)", "() => 1")]
@@ -69,6 +69,6 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var value = syntaxTree.FindEqualsValueClause(expression).Value as InvocationExpressionSyntax;
-        Assert.AreEqual(expectedCode, Await.TaskRun(value, semanticModel, CancellationToken.None)?.ToFullString());
+        Assert.That(Await.TaskRun(value, semanticModel, CancellationToken.None)?.ToFullString(), Is.EqualTo(expectedCode));
     }
 }

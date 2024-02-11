@@ -56,15 +56,15 @@ public static class DocumentationTests
     [TestCaseSource(nameof(DescriptorInfos))]
     public static void UniqueIds(DescriptorInfo descriptorInfo)
     {
-        Assert.AreEqual(1, DescriptorInfos.Select(x => x.Descriptor)
-                                          .Distinct()
-                                          .Count(d => d.Id == descriptorInfo.Descriptor.Id));
+        Assert.That(DescriptorInfos.Select(x => x.Descriptor)
+                                   .Distinct()
+                                   .Count(d => d.Id == descriptorInfo.Descriptor.Id), Is.EqualTo(1));
     }
 
     [TestCaseSource(nameof(DescriptorsWithDocs))]
     public static void TitleId(DescriptorInfo descriptorInfo)
     {
-        Assert.AreEqual($"# {descriptorInfo.Descriptor.Id}", descriptorInfo.DocumentationFile.AllLines[0]);
+        Assert.That(descriptorInfo.DocumentationFile.AllLines[0] == $"# {descriptorInfo.Descriptor.Id}");
     }
 
     [TestCaseSource(nameof(DescriptorsWithDocs))]
@@ -75,7 +75,7 @@ public static class DocumentationTests
                                    .Skip(1)
                                    .First()
                                    .Replace("`", string.Empty, StringComparison.InvariantCulture);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCaseSource(nameof(DescriptorsWithDocs))]
@@ -94,7 +94,7 @@ public static class DocumentationTests
 
         DumpIfDebug(expected);
         DumpIfDebug(actual);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCaseSource(nameof(DescriptorsWithDocs))]

@@ -27,7 +27,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(code);
-            Assert.AreEqual(false, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.False);
         }
 
         // [TestCase("HttpClient.GetAsync(\"http://example.com\")",                             false)]
@@ -62,7 +62,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("await task",                      true)]
@@ -92,7 +92,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
     }
 }

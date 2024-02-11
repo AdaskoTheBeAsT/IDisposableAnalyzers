@@ -1047,7 +1047,7 @@ public static partial class Valid
                     public void ThrowsIfPrerequisiteIsNull()
                     {
                         var exception = Assert.Throws<ArgumentNullException>(() => new Disposable());
-                        Assert.AreEqual("Value cannot be null.\r\nParameter name: condition2", exception?.Message);
+                        Assert.That(exception?.Message, Is.EqualTo("Value cannot be null.\r\nParameter name: condition2"));
                     }
                 }
             }
@@ -1124,14 +1124,14 @@ public static partial class Valid
                     public static void Throws()
                     {
                         Assert.Throws<InvalidOperationException>(() => Create(true));
-                        Assert.AreEqual(
-                            "Expected",
-                            Assert.Throws<InvalidOperationException>(() => Create(true))?.Message);
+                        Assert.That(
+                            Assert.Throws<InvalidOperationException>(() => Create(true))?.Message,
+                            Is.EqualTo("Expected"));
 
                         Assert.ThrowsAsync<InvalidOperationException>(() => CreateAsync(true));
-                        Assert.AreEqual(
-                            "Expected",
-                            Assert.ThrowsAsync<InvalidOperationException>(() => CreateAsync(true))?.Message);
+                        Assert.That(
+                            Assert.ThrowsAsync<InvalidOperationException>(() => CreateAsync(true))?.Message,
+                            Is.EqualTo("Expected"));
                     }
 
                     private static Disposable Create(bool b)

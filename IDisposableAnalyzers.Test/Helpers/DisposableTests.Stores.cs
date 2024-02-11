@@ -30,9 +30,9 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [TestCase("string", "string.Format(\"{0}\", disposable)")]
@@ -64,9 +64,9 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [TestCase("Add(disposable)")]
@@ -93,10 +93,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("Initialize(disposable)")]
@@ -128,10 +128,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("Initialize(disposables, disposable)")]
@@ -163,11 +163,11 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual(SymbolKind.Parameter, container.Kind);
-            Assert.AreEqual("disposables", container.Name);
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.Kind, Is.EqualTo(SymbolKind.Parameter));
+            Assert.That(container.Name, Is.EqualTo("disposables"));
         }
 
         [TestCase("Initialize(disposables, disposable)")]
@@ -197,11 +197,11 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual(SymbolKind.Parameter, container.Kind);
-            Assert.AreEqual("disposables", container.Name);
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.Kind, Is.EqualTo(SymbolKind.Parameter));
+            Assert.That(container.Name, Is.EqualTo("disposables"));
         }
 
         [Test]
@@ -227,10 +227,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [Test]
@@ -256,10 +256,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("new Disposable[] { disposable }")]
@@ -286,10 +286,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [Test]
@@ -315,10 +315,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("private Queue<IDisposable> disposables = new Queue<IDisposable>()")]
@@ -346,10 +346,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("private Dictionary<int, IDisposable> disposables = new Dictionary<int, IDisposable>()")]
@@ -378,10 +378,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("TryAdd(1, disposable)")]
@@ -408,10 +408,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [Test]
@@ -436,10 +436,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposables", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposables"));
         }
 
         [TestCase("Tuple.Create(disposable, 1)")]
@@ -466,10 +466,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.tuple", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.tuple"));
         }
 
         [TestCase("_ = Tuple.Create(disposable, 1)")]
@@ -495,9 +495,9 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [TestCase("disposable1")]
@@ -537,10 +537,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter(parameter);
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.pair", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.pair"));
         }
 
         [TestCase("disposable1")]
@@ -581,10 +581,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter(parameter);
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.pair", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.pair"));
         }
 
         [TestCase("disposable1")]
@@ -629,10 +629,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter(parameter);
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.pair", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.pair"));
         }
 
         [TestCase("disposable1")]
@@ -679,10 +679,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter(parameter);
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.pair", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.pair"));
         }
 
         [TestCase("new BinaryReader(stream)", true)]
@@ -732,13 +732,13 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("stream");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(stores, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual(stores, Disposable.DisposedByReturnValue(syntaxTree.FindArgument("stream"), semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.EqualTo(stores));
+            Assert.That(Disposable.DisposedByReturnValue(syntaxTree.FindArgument("stream"), semanticModel, CancellationToken.None, out _), Is.EqualTo(stores));
             if (stores)
             {
-                Assert.AreEqual("N.C.disposable", container.ToString());
+                Assert.That(container.ToString(), Is.EqualTo("N.C.disposable"));
             }
         }
 
@@ -766,13 +766,13 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("handler");
-            Assert.AreEqual(true,   semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true,   LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(stores, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual(stores, Disposable.DisposedByReturnValue(syntaxTree.FindArgument("handler"), semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.EqualTo(stores));
+            Assert.That(Disposable.DisposedByReturnValue(syntaxTree.FindArgument("handler"), semanticModel, CancellationToken.None, out _), Is.EqualTo(stores));
             if (stores)
             {
-                Assert.AreEqual("N.C.disposable", container.ToString());
+                Assert.That(container.ToString(), Is.EqualTo("N.C.disposable"));
             }
         }
 
@@ -803,10 +803,10 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("Stream stream");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("N.C.disposable", container.ToString());
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.ToString(), Is.EqualTo("N.C.disposable"));
         }
 
         [Test]
@@ -837,7 +837,7 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindArgument("File.OpenRead(string.Empty)");
-            Assert.AreEqual(true, Disposable.DisposedByReturnValue(value, semanticModel, CancellationToken.None, out _));
+            Assert.That(Disposable.DisposedByReturnValue(value, semanticModel, CancellationToken.None, out _), Is.True);
         }
 
         [Test]
@@ -862,9 +862,9 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("Stream stream");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [TestCase("disposable.AddAndReturn(stream)")]
@@ -912,11 +912,11 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("Stream stream");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container));
-            Assert.AreEqual("disposable", container.Name);
-            Assert.AreEqual(SymbolKind.Parameter, container.Kind);
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out var container), Is.True);
+            Assert.That(container.Name, Is.EqualTo("disposable"));
+            Assert.That(container.Kind, Is.EqualTo(SymbolKind.Parameter));
         }
 
         [Test]
@@ -948,9 +948,9 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("Stream stream");
-            Assert.AreEqual(true, semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol));
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.True);
         }
     }
 }

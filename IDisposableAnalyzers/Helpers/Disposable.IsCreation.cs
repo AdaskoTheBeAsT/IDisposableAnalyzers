@@ -91,7 +91,7 @@ internal static partial class Disposable
 
         using var recursive = RecursiveValues.Borrow(assignedValues.Values, semanticModel, cancellationToken);
         return IsAnyCreation(recursive, semanticModel, cancellationToken);
-
+#pragma warning disable CS8601
         bool IsReturnedBefore(ExpressionSyntax expression)
         {
             if (expression.TryFirstAncestor(out BlockSyntax? block) &&
@@ -110,6 +110,7 @@ internal static partial class Disposable
 
             return false;
         }
+#pragma warning restore CS8601
     }
 
     internal static bool IsAssignedWithCreated(ISymbol symbol, ExpressionSyntax location, SemanticModel semanticModel, CancellationToken cancellationToken)

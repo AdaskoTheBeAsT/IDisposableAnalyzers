@@ -93,7 +93,9 @@ namespace N
     {
         public static bool M(string fileName)
         {
+#pragma warning disable CS8601
             return TryM(fileName, ↓out _);
+#pragma warning restore CS8601
         }
 
         private static bool TryM(string fileName, [NotNullWhen(true)] out FileStream? stream)
@@ -128,7 +130,9 @@ namespace N
 
     public static class C
     {
+#pragma warning disable CS8601
         public static bool M(string fileName) => TryM(fileName, ↓out _);
+#pragma warning restore CS8601
 
         private static bool TryM(string fileName, [NotNullWhen(true)] out FileStream? stream)
         {

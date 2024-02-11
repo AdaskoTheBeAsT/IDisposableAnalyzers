@@ -558,7 +558,7 @@ namespace N
 {
     public class C
     {
-        private readonly object bar = string.Copy(string.Empty);
+        private readonly object bar = string.Empty;
     }
 }";
         RoslynAssert.Valid(Analyzer, code);

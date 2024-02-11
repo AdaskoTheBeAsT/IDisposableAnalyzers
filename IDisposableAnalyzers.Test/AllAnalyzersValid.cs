@@ -48,7 +48,7 @@ public static class AllAnalyzersValid
     [Test]
     public static void NotEmpty()
     {
-        CollectionAssert.IsNotEmpty(AllAnalyzers);
+        Assert.That(AllAnalyzers, Is.Not.Empty);
     }
 
     [TestCaseSource(nameof(AllAnalyzers))]

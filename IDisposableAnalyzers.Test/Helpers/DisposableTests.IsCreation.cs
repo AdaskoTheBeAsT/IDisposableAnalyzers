@@ -57,9 +57,9 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(expression).Value;
-            Assert.AreEqual(true, semanticModel.TryGetType(value, CancellationToken.None, out var type));
-            Assert.IsNotInstanceOf<IErrorTypeSymbol>(type);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetType(value, CancellationToken.None, out var type), Is.True);
+            Assert.That(type, Is.Not.TypeOf<IErrorTypeSymbol>());
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("StaticCreateIntStatementBody()")]
@@ -130,7 +130,7 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation(expression);
-            Assert.AreEqual(false, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.False);
         }
 
         [TestCase("Id(disposable)",                                   false)]
@@ -228,7 +228,7 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation(expression);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("StaticRecursiveStatementBody()",  false)]
@@ -284,7 +284,7 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation(expression);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [Test]
@@ -321,7 +321,7 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation("WithOptionalParameter(value)");
-            Assert.AreEqual(false, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.False);
         }
 
         [TestCase("Task.Run(() => 1)",                         false)]
@@ -377,7 +377,7 @@ public static partial class DisposableTests
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(expression)
                                   .Value;
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("Control.FromHandle(IntPtr.Zero)",      false)]
@@ -407,7 +407,7 @@ public static partial class DisposableTests
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(expression)
                                   .Value;
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [Test]
@@ -455,7 +455,7 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation("disposable.AddAndReturn(File.OpenRead(string.Empty))");
-            Assert.AreEqual(false, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.False);
         }
 
         [TestCase("disposable.AsCustom()")]
@@ -497,7 +497,7 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences!.Append(binary));
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(true, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.True);
         }
 
         [TestCase("disposable.Fluent()")]
@@ -538,7 +538,7 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, references);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(false, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.False);
         }
 
         [TestCase("",                                                                                   "System.IO.File.OpenText(string.Empty)",                              true)]
@@ -596,9 +596,9 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(true, semanticModel.TryGetType(value, CancellationToken.None, out var type));
-            Assert.IsNotInstanceOf<IErrorTypeSymbol>(type);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetType(value, CancellationToken.None, out var type), Is.True);
+            Assert.That(type, Is.Not.TypeOf<IErrorTypeSymbol>());
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("Activator.CreateInstance<Disposable>()",                                                 true)]
@@ -634,9 +634,9 @@ public static partial class DisposableTests
                 CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindEqualsValueClause(expression).Value;
-            Assert.AreEqual(true, semanticModel.TryGetType(value, CancellationToken.None, out var type));
-            Assert.IsNotInstanceOf<IErrorTypeSymbol>(type);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetType(value, CancellationToken.None, out var type), Is.True);
+            Assert.That(type, Is.Not.TypeOf<IErrorTypeSymbol>());
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("",                      "Factory.StaticDisposableField",                  false)]
@@ -718,12 +718,12 @@ public static partial class DisposableTests
                 new[] { syntaxTree },
                 Settings.Default.MetadataReferences!.Append(binaryReference),
                 CodeFactory.DllCompilationOptions.WithMetadataImportOptions(MetadataImportOptions.Public));
-            CollectionAssert.IsEmpty(compilation.GetDiagnostics().Where(x => x.Severity == DiagnosticSeverity.Error));
+            Assert.That(compilation.GetDiagnostics().Where(x => x.Severity == DiagnosticSeverity.Error), Is.Empty);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(true, semanticModel.TryGetType(value, CancellationToken.None, out var type));
-            Assert.IsNotInstanceOf<IErrorTypeSymbol>(type);
-            Assert.AreEqual(expected, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(semanticModel.TryGetType(value, CancellationToken.None, out var type), Is.True);
+            Assert.That(type, Is.Not.TypeOf<IErrorTypeSymbol>());
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.EqualTo(expected));
         }
 
         [TestCase("Interlocked.Exchange(ref _disposable, new MemoryStream())")]
@@ -752,7 +752,7 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindInvocation(expression);
-            Assert.AreEqual(true, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.True);
         }
 
         [TestCase("new S()")]
@@ -775,7 +775,7 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expression);
-            Assert.AreEqual(true, Disposable.IsCreation(value, semanticModel, CancellationToken.None));
+            Assert.That(Disposable.IsCreation(value, semanticModel, CancellationToken.None), Is.True);
         }
 
         [Ignore("Script")]

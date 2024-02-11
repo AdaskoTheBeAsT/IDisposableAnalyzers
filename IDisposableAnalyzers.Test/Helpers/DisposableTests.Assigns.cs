@@ -30,8 +30,8 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [Test]
@@ -55,8 +55,8 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(false, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out _));
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
 
         [Test]
@@ -82,9 +82,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(), Is.EqualTo("N.C.disposable"));
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter),                               Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(),                                                                    Is.EqualTo("N.C.disposable"));
         }
 
         [Test]
@@ -144,9 +144,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter),                               Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(),                                                                    Is.EqualTo("N.C.disposable"));
         }
 
         [Test]
@@ -172,9 +172,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.Disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter),                               Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(),                                                                    Is.EqualTo("N.C.Disposable"));
         }
 
         [Test]
@@ -205,9 +205,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.Disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter),                               Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(),                                                                    Is.EqualTo("N.C.Disposable"));
         }
 
         [Test]
@@ -235,9 +235,9 @@ namespace N
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindParameter("IDisposable disposable");
             var symbol = semanticModel.GetDeclaredSymbol(value, CancellationToken.None);
-            Assert.AreEqual(true, LocalOrParameter.TryCreate(symbol, out var localOrParameter));
-            Assert.AreEqual(true, Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field));
-            Assert.AreEqual("N.C.Disposable", field.Symbol.ToString());
+            Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter),                               Is.True);
+            Assert.That(Disposable.Assigns(localOrParameter, semanticModel, CancellationToken.None, out var field), Is.True);
+            Assert.That(field.Symbol.ToString(),                                                                    Is.EqualTo("N.C.Disposable"));
         }
 
         [TestCase("Task.FromResult(File.OpenRead(fileName))")]
@@ -274,8 +274,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression("File.OpenRead(fileName)");
-            Assert.AreEqual(true, Disposable.Assigns(value, semanticModel, CancellationToken.None, out var fieldOrProperty));
-            Assert.AreEqual("disposable", fieldOrProperty.Name);
+            Assert.That(Disposable.Assigns(value, semanticModel, CancellationToken.None, out var fieldOrProperty), Is.True);
+            Assert.That(fieldOrProperty.Name, Is.EqualTo("disposable"));
         }
 
         [TestCase("Task.FromResult(File.OpenRead(fileName)).Result")]
@@ -313,8 +313,8 @@ namespace N
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression("File.OpenRead(fileName)");
-            Assert.AreEqual(true, Disposable.Assigns(value, semanticModel, CancellationToken.None, out var fieldOrProperty));
-            Assert.AreEqual("disposable", fieldOrProperty.Name);
+            Assert.That(Disposable.Assigns(value, semanticModel, CancellationToken.None, out var fieldOrProperty), Is.True);
+            Assert.That(fieldOrProperty.Name,                                                                      Is.EqualTo("disposable"));
         }
     }
 }

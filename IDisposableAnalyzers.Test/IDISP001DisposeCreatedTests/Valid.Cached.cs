@@ -23,7 +23,9 @@ namespace N
     {
         private static readonly Dictionary<int, FileStream> Map = new Dictionary<int, FileStream>();
 
+#pragma warning disable CS8601
         public static bool M(int i) => Map.TryGetValue(i, out _);
+#pragma warning restore CS8601
     }
 }".AssertReplace("out _", expression);
         RoslynAssert.Valid(Analyzer, code);
@@ -47,7 +49,9 @@ namespace N
     {
         public static readonly Dictionary<int, FileStream> Map = new Dictionary<int, FileStream>();
 
+#pragma warning disable CS8601
         public static bool M(int i) => TryGet(i, out _);
+#pragma warning restore CS8601
 
         private static bool TryGet(int i, [NotNullWhen(true)] out FileStream? stream)
         {

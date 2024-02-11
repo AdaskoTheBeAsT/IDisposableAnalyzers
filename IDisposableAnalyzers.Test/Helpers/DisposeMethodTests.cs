@@ -43,7 +43,7 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var method = semanticModel.GetDeclaredSymbol(syntaxTree.FindClassDeclaration("C"));
-        Assert.AreEqual("N.C.Dispose()", DisposeMethod.Find(method, compilation, search).ToString());
+        Assert.That(DisposeMethod.Find(method, compilation, search).ToString(), Is.EqualTo("N.C.Dispose()"));
     }
 
     [Ignore("Not sure if we want to find explicit.")]
@@ -83,7 +83,7 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var method = semanticModel.GetDeclaredSymbol(syntaxTree.FindClassDeclaration("C"));
-        Assert.AreEqual("N.C.Dispose()", DisposeMethod.Find(method, compilation, search).ToString());
+        Assert.That(DisposeMethod.Find(method, compilation, search).ToString(), Is.EqualTo("N.C.Dispose()"));
     }
 
     [TestCase(Search.TopLevel)]
@@ -130,7 +130,7 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var method = semanticModel.GetDeclaredSymbol(syntaxTree.FindClassDeclaration("C"));
-        Assert.AreEqual("N.C.Dispose(bool)", DisposeMethod.FindVirtual(method, compilation, search).ToString());
+        Assert.That(DisposeMethod.FindVirtual(method, compilation, search).ToString(), Is.EqualTo("N.C.Dispose(bool)"));
     }
 
     [TestCase(Search.TopLevel)]
@@ -177,6 +177,6 @@ namespace N
         var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var method = semanticModel.GetDeclaredSymbol(syntaxTree.FindClassDeclaration("C"));
-        Assert.AreEqual("N.C.Dispose()", DisposeMethod.FindFirst(method, compilation, search).ToString());
+        Assert.That(DisposeMethod.FindFirst(method, compilation, search).ToString(), Is.EqualTo("N.C.Dispose()"));
     }
 }

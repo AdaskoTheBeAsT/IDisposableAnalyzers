@@ -32,6 +32,6 @@ namespace N
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
         var declaration = syntaxTree.FindFieldDeclaration("disposable");
         var symbol = semanticModel.GetDeclaredSymbolSafe(declaration, CancellationToken.None);
-        Assert.AreEqual(true, DisposableMember.IsDisposed(new FieldOrPropertyAndDeclaration(symbol!, declaration), semanticModel, CancellationToken.None));
+        Assert.That(DisposableMember.IsDisposed(new FieldOrPropertyAndDeclaration(symbol!, declaration), semanticModel, CancellationToken.None), Is.True);
     }
 }

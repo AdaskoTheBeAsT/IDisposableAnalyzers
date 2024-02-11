@@ -27,25 +27,40 @@ internal class MethodReturnValuesAnalyzer : DiagnosticAnalyzer
             Disposable.IsAssignableFrom(method.ReturnType, context.Compilation))
         {
             using var walker = ReturnValueWalker.Borrow(methodDeclaration, ReturnValueSearch.RecursiveInside, context.SemanticModel, context.CancellationToken);
-            if (walker.Values.TryFirst(x => IsCreated(x), out _) &&
+            if (walker.Values.TryFirst(IsCreated, out _) &&
                 walker.Values.TryFirst(x => IsCachedOrInjected(x) && !IsNop(x), out _))
             {
                 context.ReportDiagnostic(Diagnostic.Create(Descriptors.IDISP015DoNotReturnCachedAndCreated, methodDeclaration.Identifier.GetLocation()));
             }
         }
 
-        bool IsCreated(ExpressionSyntax expression)
+        bool IsCreated(ExpressionSyntax? expression)
         {
+            if (expression is null)
+            {
+                return false;
+            }
+
             return Disposable.IsCreation(expression, context.SemanticModel, context.CancellationToken);
         }
 
-        bool IsCachedOrInjected(ExpressionSyntax expression)
+        bool IsCachedOrInjected(ExpressionSyntax? expression)
         {
+            if (expression is null)
+            {
+                return false;
+            }
+
             return Disposable.IsCachedOrInjected(expression, expression, context.SemanticModel, context.CancellationToken);
         }
 
-        bool IsNop(ExpressionSyntax expression)
+        bool IsNop(ExpressionSyntax? expression)
         {
+            if (expression is null)
+            {
+                return true;
+            }
+
             return Disposable.IsNop(expression, context.SemanticModel, context.CancellationToken);
         }
     }

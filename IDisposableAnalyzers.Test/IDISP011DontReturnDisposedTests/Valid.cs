@@ -941,7 +941,7 @@ namespace N
         public void ThrowsIfPrerequisiteIsNull()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => new Disposable());
-            Assert.AreEqual(""Value cannot be null.\r\nParameter name: condition2"", exception?.Message);
+            Assert.That(exception?.Message, Is.EqualTo(""Value cannot be null.\r\nParameter name: condition2""));
         }
     }
 }";

@@ -41,7 +41,7 @@ namespace N
         var value = syntaxTree.FindEqualsValueClause(code).Value;
         using var walker = AssignedValueWalker.Borrow(value, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -69,6 +69,6 @@ namespace N
         var argument = syntaxTree.FindArgument("t1");
         using var walker = AssignedValueWalker.Borrow(argument.Expression, semanticModel, CancellationToken.None);
         var actual = string.Join(", ", walker.Values);
-        Assert.AreEqual("default", actual);
+        Assert.That(actual, Is.EqualTo("default"));
     }
 }
