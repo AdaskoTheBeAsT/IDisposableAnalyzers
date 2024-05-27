@@ -26,7 +26,7 @@
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NUnit" Version="4.1.0" />
-    <PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
-    <PackageReference Include="reactiveui" Version="19.5.41" />
+    <PackageReference Include="System.Reactive.Linq" Version="6.0.1" />
+    <PackageReference Include="reactiveui" Version="20.1.1" />
   </ItemGroup>
 </Project>
