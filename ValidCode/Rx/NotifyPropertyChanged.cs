@@ -5,21 +5,21 @@ using System.Runtime.CompilerServices;
 
 public class NotifyPropertyChanged : INotifyPropertyChanged
 {
-    private int value;
+    private int _value;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public int Value
     {
-        get => this.value;
+        get => _value;
         set
         {
-            if (value == this.value)
+            if (value == _value)
             {
                 return;
             }
 
-            this.value = value;
+            _value = value;
             this.OnPropertyChanged();
         }
     }

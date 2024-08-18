@@ -324,13 +324,13 @@ namespace N
 
     public sealed class C<T>
     {
-        private T value;
+        private T _value;
         private List<T> values = new List<T>();
 
         public T Value
         {
-            get { return this.value; }
-            private set { this.value = value; }
+            get { return _value; }
+            private set { _value = value; }
         }
 
         /// <inheritdoc/>

@@ -328,20 +328,20 @@ namespace N
     public sealed class C : IDisposable
     {
         private bool disposed;
-        private int value;
+        private int _value;
 
         public int Value
         {
             get
             {
                 this.ThrowIfDisposed();
-                return this.value;
+                return _value;
             }
 
             set
             {
                 this.ThrowIfDisposed();
-                this.value = value;
+                _value = value;
             }
         }
 
@@ -387,20 +387,20 @@ namespace N
     public sealed class C : IDisposable
     {
         private bool disposed;
-        private int value;
+        private int _value;
 
         public int Value
         {
             get
             {
                 this.ThrowIfDisposed();
-                return this.value;
+                return _value;
             }
 
             set
             {
                 this.ThrowIfDisposed();
-                this.value = value;
+                _value = value;
             }
         }
 
