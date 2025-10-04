@@ -48,7 +48,7 @@ internal static partial class Disposable
         switch (candidate)
         {
             case { Parent: MemberAccessExpressionSyntax { Parent: InvocationExpressionSyntax { ArgumentList.Arguments: { Count: 1 } arguments } invocation } }
-                when invocation.IsSymbol(KnownSymbols.DisposableMixins.DisposeWith, recursion.SemanticModel, recursion.CancellationToken) &&
+                when invocation.IsSymbol(KnownSymbols.DisposableExtensions.DisposeWith, recursion.SemanticModel, recursion.CancellationToken) &&
                      recursion.SemanticModel.TryGetSymbol(arguments[0].Expression, recursion.CancellationToken, out container):
                 return true;
             case { Parent: InitializerExpressionSyntax { Parent: ImplicitArrayCreationExpressionSyntax arrayCreation } }:

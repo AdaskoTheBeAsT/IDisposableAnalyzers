@@ -4,6 +4,7 @@ using System.Threading;
 using Gu.Roslyn.Asserts;
 using Microsoft.CodeAnalysis.CSharp;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 public static partial class DisposableTests
 {
@@ -1124,9 +1125,9 @@ public static partial class DisposableTests
             Assert.That(Disposable.Ignores(value, semanticModel, CancellationToken.None), Is.False);
         }
 
-        [TestCase("observable.Subscribe(x => Console.WriteLine(x))")]
-        [TestCase("observable.Subscribe(x => Console.WriteLine(x)).DisposeWith(this.disposable)")]
-        public static void DisposeWith(string expressionText)
+        [TestCase("observable.Subscribe(x => Console.WriteLine(x))", true)]
+        [TestCase("observable.Subscribe(x => Console.WriteLine(x)).DisposeWith(this.disposable)", false)]
+        public static void DisposeWith(string expressionText, bool expected)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText("""
 
@@ -1155,7 +1156,8 @@ public static partial class DisposableTests
             var compilation = CSharpCompilation.Create("test", new[] { syntaxTree }, Settings.Default.MetadataReferences);
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
             var value = syntaxTree.FindExpression(expressionText);
-            Assert.That(Disposable.Ignores(value, semanticModel, CancellationToken.None), Is.False);
+            var constraint = expected ? (Constraint)Is.True : Is.False;
+            Assert.That(Disposable.Ignores(value, semanticModel, CancellationToken.None), constraint);
         }
 
         [TestCase(".Append(1)")]

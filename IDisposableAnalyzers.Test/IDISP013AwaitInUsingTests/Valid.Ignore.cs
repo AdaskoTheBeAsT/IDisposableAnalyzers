@@ -1,5 +1,4 @@
 ﻿namespace IDisposableAnalyzers.Test.IDISP013AwaitInUsingTests;
-
 using Gu.Roslyn.Asserts;
 using NUnit.Framework;
 
@@ -58,7 +57,7 @@ namespace N
     }
 }";
 
-            RoslynAssert.Valid(Analyzer, code);
+            RoslynAssert.Valid(Analyzer, code, LibrarySettings.Linq);
         }
     }
 }

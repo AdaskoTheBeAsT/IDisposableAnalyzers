@@ -136,6 +136,7 @@ namespace N
         private static readonly int value2;
 
         private static int value3;
+
         private readonly System.Reactive.Disposables.CompositeDisposable disposable;
         private int value4;
 
@@ -174,7 +175,7 @@ namespace N
 
         internal C()
         {
-            ↓File.OpenRead(string.Empty);
+            File.OpenRead(string.Empty);
         }
     }
 }";
@@ -193,6 +194,7 @@ namespace N
         private static readonly int value2;
 
         private static int value3;
+
         private readonly System.Reactive.Disposables.CompositeDisposable _disposable;
         private int _value4;
 

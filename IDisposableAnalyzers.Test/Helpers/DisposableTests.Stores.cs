@@ -927,7 +927,7 @@ namespace N
 {
     using System;
     using System.IO;
-    using System.Reactive.Disposables;
+    using System.Reactive.Disposables.Fluent;
 
     sealed class C : IDisposable
     {
@@ -950,7 +950,7 @@ namespace N
             var value = syntaxTree.FindParameter("Stream stream");
             Assert.That(semanticModel.TryGetSymbol(value, CancellationToken.None, out var symbol), Is.True);
             Assert.That(LocalOrParameter.TryCreate(symbol, out var localOrParameter), Is.True);
-            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.True);
+            Assert.That(Disposable.Stores(localOrParameter, semanticModel, CancellationToken.None, out _), Is.False);
         }
     }
 }

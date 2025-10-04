@@ -121,6 +121,34 @@ public static partial class Valid
     }
 
     [Test]
+    public static void TaskFromResultUsingAwait()
+    {
+        var code = """
+                   namespace N
+                   {
+                       using System;
+                       using System.Threading.Tasks;
+
+                       public class C
+                       {
+                           public async Task<int> M()
+                           {
+                               await using var r = new R();
+                               await Task.Yield();
+                               return 42;
+                           }
+                       }
+                       
+                       public sealed class R : IAsyncDisposable
+                       {
+                           public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+                       }
+                   }
+                   """;
+        RoslynAssert.Valid(Analyzer, code);
+    }
+
+    [Test]
     public static void ValueTaskFromResult()
     {
         var code = """

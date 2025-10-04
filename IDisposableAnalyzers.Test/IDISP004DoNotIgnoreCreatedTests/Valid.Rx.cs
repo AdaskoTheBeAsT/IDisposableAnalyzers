@@ -477,6 +477,7 @@ namespace N
 {
     using System;
     using System.Reactive.Disposables;
+    using System.Reactive.Disposables.Fluent;
 
     public sealed class Issue298 : IDisposable
     {

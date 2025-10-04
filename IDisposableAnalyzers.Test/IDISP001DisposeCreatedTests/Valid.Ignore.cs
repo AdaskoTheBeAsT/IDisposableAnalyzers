@@ -1,5 +1,4 @@
-namespace IDisposableAnalyzers.Test.IDISP001DisposeCreatedTests;
-
+﻿namespace IDisposableAnalyzers.Test.IDISP001DisposeCreatedTests;
 using Gu.Roslyn.Asserts;
 using NUnit.Framework;
 
@@ -80,6 +79,7 @@ namespace N
             {
                 using System;
                 using System.Reactive.Disposables;
+                using System.Reactive.Disposables.Fluent;
                 using ReactiveUI;
                 
                 public sealed class C : IDisposable
@@ -99,6 +99,6 @@ namespace N
             }
             """;
 
-        RoslynAssert.Valid(Analyzer, Code);
+        RoslynAssert.Valid(Analyzer, [Code], LibrarySettings.ReactiveUi);
     }
 }

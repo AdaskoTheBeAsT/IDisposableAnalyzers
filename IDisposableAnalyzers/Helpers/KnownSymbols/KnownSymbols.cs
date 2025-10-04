@@ -88,7 +88,7 @@ internal static class KnownSymbols
     internal static readonly QualifiedType NinjectStandardKernel = new("Ninject.StandardKernel");
     internal static readonly QualifiedType ILoggerFactory = new("Microsoft.Extensions.Logging.ILoggerFactory");
     internal static readonly IHostedServiceType IHostedService = new();
-    internal static readonly DisposableMixins DisposableMixins = new();
+    internal static readonly DisposableExtensions DisposableExtensions = new();
 
     private static QualifiedType Create(string qualifiedName, string? alias = null)
     {

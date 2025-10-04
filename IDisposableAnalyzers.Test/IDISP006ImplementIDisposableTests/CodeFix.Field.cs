@@ -32,6 +32,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public void Dispose()
@@ -94,6 +95,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public C()
@@ -178,6 +180,7 @@ namespace N
     public class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public C()
@@ -256,6 +259,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public void Dispose()
@@ -303,6 +307,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public void Dispose()
@@ -351,6 +356,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly Stream _stream = File.OpenRead(string.Empty);
+
         private bool _disposed;
 
         public void Dispose()
@@ -403,6 +409,7 @@ namespace N
         public const int Value = 2;
 
         private readonly Stream _stream = File.OpenRead(string.Empty);
+
         private bool _disposed;
 
         public void Dispose()
@@ -451,6 +458,7 @@ namespace N
     public abstract class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public virtual void Dispose()
@@ -499,6 +507,7 @@ namespace N
     public abstract class C : IDisposable
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
+
         private bool disposed;
 
         public void Dispose()
@@ -556,6 +565,7 @@ namespace N
     public abstract class C : IDisposable
     {
         private readonly Stream _stream = File.OpenRead(string.Empty);
+
         private bool _disposed;
 
         public void Dispose()
@@ -619,6 +629,7 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly IDisposable value;
+
         private bool disposed;
 
         private C(IDisposable value)
@@ -674,6 +685,7 @@ namespace N
     public sealed partial class CodeTabView : UserControl, IDisposable
     {
         private readonly Disposable disposable = new Disposable();
+
         private bool disposed;
 
         public void Dispose()

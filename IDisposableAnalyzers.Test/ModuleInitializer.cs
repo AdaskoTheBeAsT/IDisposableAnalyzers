@@ -12,7 +12,7 @@ internal static class ModuleInitializer
             MetadataReferences.Transitive(
                 typeof(ModuleInitializer),
                 typeof(System.Data.Entity.DbContext),
-                typeof(System.Reactive.Disposables.DisposableMixins),
+                typeof(System.Reactive.Disposables.Fluent.DisposableExtensions),
                 typeof(System.Windows.Controls.Control),
                 typeof(System.Windows.Forms.Control),
                 typeof(Microsoft.Extensions.DependencyInjection.ServiceCollection),
