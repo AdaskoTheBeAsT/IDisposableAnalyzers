@@ -22,6 +22,14 @@ internal static partial class Disposable
             return false;
         }
 
+        // Special-case HttpClient: do not require disposing of HttpClient instances.
+        // Guidance is to use a single instance or use IHttpClientFactory. In either case,
+        // IDISP001 should not warn about not disposing HttpClient.
+        if (localOrParameter.Type.IsAssignableTo(KnownSymbols.HttpClient, semanticModel.Compilation))
+        {
+            return false;
+        }
+
         if (Scope() is BlockSyntax localBlock && IsVariableDeclarationWithDisposeAsExtensionCall(localBlock))
         {
             return false;
