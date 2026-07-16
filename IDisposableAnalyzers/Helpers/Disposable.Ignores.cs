@@ -101,7 +101,11 @@ internal static partial class Disposable
 
     private static bool Ignores(Target<ArgumentSyntax, IParameterSymbol, BaseMethodDeclarationSyntax> target, Recursion recursion)
     {
-        if (target.Symbol.Type.MetadataName is "TestDelegate" or "AsyncTestDelegate")
+        if (target.Symbol.Type.MetadataName is "TestDelegate" or "AsyncTestDelegate" ||
+            (target.Source.Parent?.Parent is InvocationExpressionSyntax invocation &&
+             recursion.SemanticModel.TryGetSymbol(invocation, recursion.CancellationToken, out IMethodSymbol? method) &&
+             method.Name == "ThrowsAsync" &&
+             method.ContainingType == KnownSymbols.NUnit.Assert))
         {
             return false;
         }

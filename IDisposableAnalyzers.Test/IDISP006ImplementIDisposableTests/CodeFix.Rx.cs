@@ -36,7 +36,6 @@ namespace N
     public sealed class C : IDisposable
     {
         private readonly IDisposable? disposable;
-
         private bool disposed;
 
         public C(IObservable<object> observable)

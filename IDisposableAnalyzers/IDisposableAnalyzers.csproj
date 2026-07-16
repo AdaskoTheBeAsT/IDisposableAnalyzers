@@ -29,7 +29,7 @@
 
   <PropertyGroup>
     <PackageId>AdaskoTheBeAsT.IDisposableAnalyzers</PackageId>
-    <Version>4.0.7.21</Version>
+    <Version>4.0.7.200</Version>
     <DevelopmentDependency>true</DevelopmentDependency>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Description>Analyzers and fixes for IDisposable.</Description>
@@ -138,13 +138,13 @@
 
   <ItemGroup>
     <PackageReference Include="Gu.Analyzers" Version="2.0.3" PrivateAssets="all" />
-    <PackageReference Include="AdaskoTheBeAsT.Gu.Roslyn.Extensions.Source" Version="0.17.1.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+    <PackageReference Include="AdaskoTheBeAsT.Gu.Roslyn.Extensions.Source" Version="0.17.1.200" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.6.0" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[9.0.0]" />
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[10.0.0]" />
     <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.160" PrivateAssets="all" />
   </ItemGroup>
 

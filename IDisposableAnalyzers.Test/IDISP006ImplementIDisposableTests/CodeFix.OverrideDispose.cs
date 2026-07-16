@@ -36,7 +36,6 @@ namespace N
     public class C : StreamReader
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
-
         private bool disposed;
 
         public C(string path)
@@ -130,7 +129,6 @@ namespace N
     public class C : BaseClass
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
-
         private bool disposed;
 
         protected override void Dispose(bool disposing)
@@ -203,7 +201,6 @@ namespace N
     public class C : BaseClass
     {
         private readonly Stream stream = File.OpenRead(string.Empty);
-
         private bool disposed;
 
         public override void Dispose()
@@ -280,7 +277,6 @@ namespace N
     public class C : BaseClass
     {
         private readonly Stream _stream = File.OpenRead(string.Empty);
-
         private bool _disposed;
 
         protected override void Dispose(bool disposing)
@@ -361,7 +357,6 @@ namespace N
     public class C : BaseClass
     {
         private readonly Stream _stream = File.OpenRead(string.Empty);
-
         private bool _disposed;
 
         protected override void Dispose(bool disposing)
@@ -413,7 +408,6 @@ namespace N
     internal class C : NinjectModule
     {
         private readonly IDisposable disposable = new Disposable();
-
         private bool disposed;
 
         public override void Load()

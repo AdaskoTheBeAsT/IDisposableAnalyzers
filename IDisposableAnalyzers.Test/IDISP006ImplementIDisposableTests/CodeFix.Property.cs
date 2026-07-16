@@ -313,7 +313,6 @@ namespace N
     {
         public const int Value = 2;
         private readonly int _value = 1;
-
         private bool _disposed;
 
         public Stream Stream { get; } = File.OpenRead(string.Empty);
