@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="18.5.40034" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="5.9.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +46,7 @@
 
   <Target Name="IncludeNuGetPackageReferences" AfterTargets="GetVsixSourceItems">
     <ItemGroup>
-      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'Gu.Roslyn.Extensions'" />
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'AdaskoTheBeAsT.Gu.Roslyn.Extensions'" />
     </ItemGroup>
   </Target>
 </Project>

@@ -1,5 +1,6 @@
 #### 4.0.7
 BUGFIX: Handle target typed new
+BUGFIX: Prevent intermittent missing diagnostics caused by semantic model cache races
 
 #### 4.0.6
 BUGFIX: Handle ref struct

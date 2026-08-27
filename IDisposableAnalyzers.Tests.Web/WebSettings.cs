@@ -16,7 +16,7 @@ internal static class WebSettings
                                        MetadataReferences.Transitive(
                                            typeof(WebSettings),
                                            typeof(Microsoft.Extensions.Hosting.GenericHostBuilderExtensions),
-                                           typeof(Microsoft.Extensions.Logging.ApplicationInsightsLoggerFactoryExtensions),
+                                           typeof(Microsoft.Extensions.Logging.ApplicationInsightsLoggingBuilderExtensions),
                                            typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions),
                                            typeof(Microsoft.AspNetCore.Builder.StaticFileExtensions),
                                            typeof(Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions),

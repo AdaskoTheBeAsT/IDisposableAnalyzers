@@ -29,7 +29,7 @@
 
   <PropertyGroup>
     <PackageId>AdaskoTheBeAsT.IDisposableAnalyzers</PackageId>
-    <Version>4.0.7.200</Version>
+    <Version>4.0.7.250</Version>
     <DevelopmentDependency>true</DevelopmentDependency>
     <Authors>Johan Larsson, milleniumbug</Authors>
     <Description>Analyzers and fixes for IDisposable.</Description>
@@ -37,6 +37,7 @@
     <PackageReleaseNotes>
       4.0.7
       BUGFIX: Handle target typed new
+      BUGFIX: Prevent intermittent missing diagnostics caused by semantic model cache races
       4.0.6
       BUGFIX: Handle ref struct
       BUGFIX: Handle target typed new
@@ -138,8 +139,8 @@
 
   <ItemGroup>
     <PackageReference Include="Gu.Analyzers" Version="2.0.3" PrivateAssets="all" />
-    <PackageReference Include="AdaskoTheBeAsT.Gu.Roslyn.Extensions.Source" Version="0.17.1.200" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.6.0" PrivateAssets="all" />
+    <PackageReference Include="AdaskoTheBeAsT.Gu.Roslyn.Extensions.Source" Version="0.17.1.251" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.9.0" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
   </ItemGroup>
 
